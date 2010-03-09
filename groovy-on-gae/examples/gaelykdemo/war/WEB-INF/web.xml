@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
+	<!-- The Gaelyk Groovlet servlet -->
+	<servlet>
+		<servlet-name>GroovletServlet</servlet-name>
+		<servlet-class>groovyx.gaelyk.GaelykServlet</servlet-class>
+	</servlet>
+
+	<!-- The Gaelyk template servlet -->
+	<servlet>
+		<servlet-name>TemplateServlet</servlet-name>
+		<servlet-class>groovyx.gaelyk.GaelykTemplateServlet</servlet-class>
+	</servlet>
+
+	<!-- Specify a mapping between *.groovy URLs and Groovlets -->
+	<servlet-mapping>
+		<servlet-name>GroovletServlet</servlet-name>
+		<url-pattern>*.groovy</url-pattern>
+	</servlet-mapping>
+
+	<!-- Specify a mapping between *.gtpl URLs and templates -->
+	<servlet-mapping>
+		<servlet-name>TemplateServlet</servlet-name>
+		<url-pattern>*.gtpl</url-pattern>
+	</servlet-mapping>
+
+	<!-- Define index.gtpl as a welcome file -->
+	<welcome-file-list>
+		<welcome-file>guestbook.groovy</welcome-file>
+	</welcome-file-list>
+</web-app>
