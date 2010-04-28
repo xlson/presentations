@@ -3,9 +3,18 @@ import se.qbranch.friendsincommon.*
 
 if(params.clearCache) {
 	memcache.clearAll()
-	forward '/index.gtpl'
 }
 
+// validate params
+
+def validParams = { ->
+	params.twitterNicks && params.twitterNicks.size() > 0
+}
+
+if(!validParams()) {
+	forward '/index.gtpl'
+	return
+}
 
 def twitterNicks = params.twitterNicks.split(",").collect { it.trim() } 
 
@@ -19,18 +28,13 @@ def fetchFriendXml(nick, cursor = -1) {
 }
 
 def fetchFriends(nick) {
-	def xml = fetchFriendXml(nick)
-	
-	def nextCursor = Long.parseLong(xml.next_cursor.text())
-	def friends = buildUsersFromXml(xml.users.user)
-	
-	while(nextCursor != 0) {
+	def friends = []
+	for(long nextCursor = -1; nextCursor != 0;) {
 		xml = fetchFriendXml(nick, nextCursor)
-		nextCursor = xml.next_cursor
+		nextCursor = xml.next_cursor.text() as Long
 		friends.addAll(buildUsersFromXml(xml.users.user))
 	}
-	
-	
+
 	return friends
 }
 
@@ -46,8 +50,7 @@ def buildUsersFromXml(users) {
 	friends
 }
 
-def twittersWithFriends = twitterNicks.collect {
-	def nick = it
+def twittersWithFriends = twitterNicks.collect { nick ->
 	def friends
 	if(nick in memcache) {
 		friends = memcache[nick]

@@ -30,6 +30,6 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 
 	<!-- Define index.gtpl as a welcome file -->
 	<welcome-file-list>
-		<welcome-file>index.gtpl</welcome-file>
+		<welcome-file>load.html</welcome-file>
 	</welcome-file-list>
 </web-app>

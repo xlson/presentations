@@ -6,7 +6,7 @@
 <B>Tweeple to check:</B><input type="text" name="twitterNicks" value=""/><input type="submit" name="Submit" value="Submit"/>
 </form>
 
-<% if(request.nicks && request.friendsInCommon) { %>
+<% if(request.getAttribute('nicks') && request.getAttribute('friendsInCommon')) { %>
 <H2><%= request.nicks %> has <%=request.friendsInCommon.size() %> friends in common...</H2>
 <table>
 	<tr><td>&nbsp;</td><td>Nick</td><td>Name</td></tr>
