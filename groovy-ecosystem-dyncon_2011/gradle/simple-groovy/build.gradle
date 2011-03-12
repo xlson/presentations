@@ -1,0 +1,12 @@
+apply plugin: 'groovy'
+apply plugin: 'application'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	groovy 'org.codehaus.groovy:groovy-all:1.7.9'
+}
+
+mainClassName='HelloWorld'

@@ -1,0 +1,5 @@
+apply plugin: 'jetty'
+
+dependencies {
+	compile project(':api')
+}

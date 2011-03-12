@@ -1,0 +1,12 @@
+#!/usr/bin/env groovyclient
+
+println(prettyPrintXml(System.in.text))
+
+def prettyPrintXml(text) {
+    def xmlNode = new XmlParser().parseText(text)
+    def writer = new StringWriter()
+    def printer = new XmlNodePrinter(new PrintWriter(writer))
+    printer.preserveWhitespace = true
+    printer.print(xmlNode)
+    writer.toString().trim()
+}
